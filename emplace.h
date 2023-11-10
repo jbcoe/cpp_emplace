@@ -24,9 +24,18 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <utility>
 
 namespace xyz {
+
+template <typename T, typename... Ts>
+concept member_emplace =
+    requires(T t, Ts &&...ts) { t.emplace(std::forward<Ts>(ts)...); };
+
 template <typename T, typename... Ts>
 void emplace(T &t, Ts &&...ts) {
-  t = T(std::forward<Ts>(ts)...);
+  if constexpr (member_emplace<T, Ts...>) {
+    t.emplace(std::forward<Ts>(ts)...);
+  } else /* constexpr */ {
+    t = T(std::forward<Ts>(ts)...);
+  }
 }
 }  // namespace xyz
 #endif  // XYZ_EMPLACE_H

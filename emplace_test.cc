@@ -22,12 +22,22 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <gtest/gtest.h>
 
+#include <set>
+
 namespace {
 
 TEST(EmplaceTest, SetInteger) {
   int x = 5;
   xyz::emplace(x, 7);
   EXPECT_EQ(x, 7);
+}
+
+TEST(EmplaceTest, InsertIntoSet) {
+  std::set<int> ints;
+  EXPECT_FALSE(ints.contains(7));
+
+  xyz::emplace(ints, 7);
+  EXPECT_TRUE(ints.contains(7));
 }
 
 }  // namespace
