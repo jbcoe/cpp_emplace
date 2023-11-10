@@ -1,0 +1,16 @@
+cc_library(
+    name = "emplace",
+    hdrs = ["emplace.h"],
+    copts = ["-Iexternal/value_types/"],
+    visibility = ["//visibility:public"],
+)
+
+cc_test(
+    name = "emplace_test",
+    size = "small",
+    srcs = ["emplace_test.cc"],
+    deps = [
+        "emplace",
+        "@com_google_googletest//:gtest_main",
+    ],
+)
