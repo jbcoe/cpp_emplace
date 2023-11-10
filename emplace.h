@@ -23,12 +23,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <utility>
 
-namespace xyz
-{
-    template <typename T, typename... Ts>
-    void emplace(T &t, Ts &&...ts)
-    {
-        t = T(std::forward<Ts>(ts)...);
-    }
-} // namespace xyz
-#endif // XYZ_EMPLACE_H
+namespace xyz {
+template <typename T, typename... Ts>
+void emplace(T &t, Ts &&...ts) {
+  t = T(std::forward<Ts>(ts)...);
+}
+}  // namespace xyz
+#endif  // XYZ_EMPLACE_H
